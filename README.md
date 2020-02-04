@@ -142,10 +142,26 @@ library(cvAUC)
 data(ROCR.simple)
 ROCR.simple
 library(pROC)
-roc(develop_dat$test, develop_dat$diag)
-
-test_auc = AUC(ROCR.simple$predictions, ROCR.simple$labels)
+test_roc =  roc(develop_dat$test, develop_dat$diag)
+test_auc = ci.auc(test_roc)
 test_auc
+```
+Just for fun how to find the optimal cut point 
+https://cran.r-project.org/web/packages/cutpointr/vignettes/cutpointr.html
+```{r}
+library(cutpointr)
+data(suicide)
+head(suicide)
+library(prettyR)
+describe.factor(suicide$dsi)
+cp <- cutpointr(suicide, dsi, suicide, method = maximize_metric, metric = sum_sens_spec)
+summary(cp)
+plot(cp)
+```
+Is the cut point different by gender
+```{r}
+opt_cut <- cutpointr(suicide, dsi, suicide, gender, method = minimize_metric, metric = misclassification_cost, cost_fp = 1, cost_fn = 10)
+summary(opt_cut)
 ```
 
 
