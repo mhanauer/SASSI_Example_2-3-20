@@ -1154,7 +1154,7 @@ SASSDR_clinical_substance_use_totals = data.frame(test_p = sum(SASSDR_clinical_s
 SASSDR_clinical_substance_use_totals
 
 #### other
-clinical_sample_other = subset(clinical_sample, CLIENTSETTING == 7)
+clinical_sample_other = subset(clinical_sample, CLIENTSETTING == 7 | CLIENTSETTING == 5)
 clinical_sample_other_total_n =  dim(clinical_sample_other)[1]
 SASSDR_clinical_other=  confusionMatrix(as.factor(clinical_sample_other$SASSDR), as.factor(clinical_sample_other$NODIAG), positive = "1")
 SASSDR_clinical_other
@@ -1191,7 +1191,7 @@ SASSDR_clinical_other_totals
 ```
 Table 18 data cleaning
 ```{r}
-clinical_sample
+clinical_sample$
 
 ```
 
@@ -1371,6 +1371,8 @@ total_gender_inaccurate = sum(male_dat_inaccurate, female_dat_inaccurate)
 ```
 Tables 24 through 26
 ```{r}
+
+### Table 24
 male_dat_total_n
 male_dat_accurate
 male_dat_inaccurate
@@ -1379,15 +1381,20 @@ female_dat_total_n
 female_dat_accurate
 female_dat_inaccurate
 
+total_gender_n
+total_gender_accurate
+total_gender_inaccurate
+
+## Table 25
 male_dat_results
 male_totals
 
+
+### Table 26
 female_dat_results
 female_totals
-total_gender_n
 
-total_gender_accurate
-total_gender_inaccurate
+
 
 
 
