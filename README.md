@@ -1394,10 +1394,11 @@ male_totals
 female_dat_results
 female_totals
 
+gender_dat_cramer = clinical_sample
+gender_dat_cramer$accurate = ifelse(clinical_sample$SASSDR == gender_dat_cramer$NODIAG,1,0)
 
-
-
-
+gender_cramersV = CramerV(gender_dat_cramer$SEX, gender_dat_cramer$accurate, conf.level = .99)
+gender_cramersV
 ```
 Table 27 
 Ages 13,14,15,16,17,18
@@ -1469,6 +1470,7 @@ age_dat_cramer$accurate = ifelse(clinical_sample$SASSDR == age_dat_cramer$NODIAG
 age_cramersV = CramerV(age_dat_cramer$AGE, age_dat_cramer$accurate, conf.level = .99)
 age_cramersV
 
+
 ```
 Table 27 results
 ```{r}
@@ -1496,6 +1498,9 @@ eighteen_dat_total_n
 eighteen_dat_results
 eighteen_dat_accurate
 eighteen_dat_inaccurate
+
+total_age_accurate
+total_age_inaccurate
 
 age_cramersV
 
@@ -1558,6 +1563,12 @@ mixed_dat_accurate =  sum(mixed_dat_results$table[1,1], mixed_dat_results$table[
 mixed_totals = data.frame(test_p = sum(mixed_dat_results$table[2,]), test_n = sum(mixed_dat_results$table[1,]), criteria_p = sum(mixed_dat_results$table[,2]), criteria_n = sum(mixed_dat_results$table[,1]))
 mixed_totals
 
+
+race_dat_cramer = clinical_sample
+race_dat_cramer$accurate = ifelse(race_dat_cramer$SASSDR == race_dat_cramer$NODIAG,1,0)
+
+race_dat_cramer = CramerV(race_dat_cramer$ETHN, race_dat_cramer$accurate, conf.level = .99)
+race_dat_cramer
 ```
 Tables 29 - 35 results
 ```{r}
@@ -1582,7 +1593,7 @@ mixed_dat_results
 mixed_dat_accurate
 mixed_totals
 
-
+race_dat_cramer
 
 ```
 Table 36 data cleaning
